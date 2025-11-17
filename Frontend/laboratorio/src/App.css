@@ -40,3 +40,29 @@
 .read-the-docs {
   color: #888;
 }
+
+.app-nav {
+  padding: 1rem;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+}
+
+.app-nav-link {
+  margin: 0 0.5rem;
+  color: #64b5f6;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.app-nav-link:hover {
+  color: #90caf9;
+  text-decoration: underline;
+}
+
+.app-content {
+  padding: 1rem;
+}

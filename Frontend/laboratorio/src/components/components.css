@@ -1,0 +1,67 @@
+/* Frontend/laboratorio/src/components/components.css */
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.form-input {
+  padding: 8px;
+  margin: 4px 0;
+  background: #333;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 4px;
+}
+
+.form-button {
+  margin-top: 1rem;
+  padding: 10px 15px;
+  border: none;
+  background-color: #646cff;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+.form-button:hover {
+  background-color: #535bf2;
+}
+
+.error-message {
+  color: #ff6b6b;
+  margin-top: 0.5rem;
+}
+
+.success-message {
+  color: #51cf66;
+  margin-top: 0.5rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  margin-top: 1rem;
+}
+
+.data-table-header {
+  background: #444;
+  padding: 12px;
+  border: 1px solid #555;
+}
+
+.data-table-cell {
+  padding: 10px;
+  border: 1px solid #555;
+}
+
+.table-placeholder-row td {
+  text-align: center;
+  padding: 1rem;
+  font-style: italic;
+  color: #888;
+}
