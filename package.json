@@ -1,0 +1,14 @@
+{
+  "name": "miniproyecto-guiax",
+  "version": "1.0.0",
+  "description": "Guia X programación web",
+  "license": "ISC",
+  "author": "André Calidonio",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  }
+}
