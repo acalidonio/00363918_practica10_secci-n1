@@ -1,8 +1,8 @@
 // backend/controllers/auth.controller.js
-import pkg from 'jsonwebtoken';
-import { pool } from '../database.js';
-import { genSalt, hash, compare } from 'bcrypt';
-import { SECRET_KEY } from '../config.js';
+import pkg from "jsonwebtoken";
+import { pool } from "../database.js";
+import { genSalt, hash, compare } from "bcrypt";
+import { SECRET_KEY } from "../config.js";
 
 const { sign } = pkg;
 const authController = {};
@@ -11,7 +11,9 @@ authController.signUp = async (req, res) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
-    return res.status(400).json({ msg: 'Por favor, ingrese nombre, email y contraseña' });
+    return res
+      .status(400)
+      .json({ msg: "Por favor, ingrese nombre, email y contraseña" });
   }
 
   try {
@@ -20,7 +22,7 @@ authController.signUp = async (req, res) => {
     const hashedPassword = await hash(password, salt);
 
     const result = await pool.query(
-      'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id',
+      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id",
       [name, email, hashedPassword]
     );
 
@@ -28,17 +30,17 @@ authController.signUp = async (req, res) => {
 
     // Generar token JWT
     const token = sign({ id: userId }, SECRET_KEY, {
-      expiresIn: "8h"
+      expiresIn: "8h",
     });
 
     res.status(201).json({ token });
   } catch (error) {
     console.error(error);
     // Error de email duplicado
-    if (error.code === '23505') {
-      return res.status(400).json({ msg: 'El email ya está registrado' });
+    if (error.code === "23505") {
+      return res.status(400).json({ msg: "El email ya está registrado" });
     }
-    res.status(500).json({ msg: 'Error del servidor' });
+    res.status(500).json({ msg: "Error del servidor" });
   }
 };
 
@@ -46,15 +48,20 @@ authController.signIn = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ msg: 'Por favor, ingrese email y contraseña' });
+    return res
+      .status(400)
+      .json({ msg: "Por favor, ingrese email y contraseña" });
   }
 
   try {
     // Buscar usuario por email
-    const userResult = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    const userResult = await pool.query(
+      "SELECT * FROM users WHERE email = $1",
+      [email]
+    );
 
     if (userResult.rows.length === 0) {
-      return res.status(404).json({ msg: 'Usuario no encontrado' });
+      return res.status(404).json({ msg: "Usuario no encontrado" });
     }
 
     const user = userResult.rows[0];
@@ -68,13 +75,13 @@ authController.signIn = async (req, res) => {
 
     // Generar y enviar token JWT
     const token = sign({ id: user.id }, SECRET_KEY, {
-      expiresIn: "8h"
+      expiresIn: "8h",
     });
 
     res.json({ token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ msg: 'Error del servidor' });
+    res.status(500).json({ msg: "Error del servidor" });
   }
 };
 
